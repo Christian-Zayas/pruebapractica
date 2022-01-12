@@ -1,0 +1,40 @@
+{
+  "name": "stored",
+  "version": "0.0.1",
+  "description": "Stored products of mother",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CristianZayas/stored.git"
+  },
+  "author": "Cristian Arieta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CristianZayas/stored/issues"
+  },
+  "homepage": "https://github.com/CristianZayas/stored#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cloudinary": "^1.25.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "ejs-mate": "^3.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "fs-extra": "^9.1.0",
+    "helmet": "^4.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "mongoose": "^5.12.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "socket.io": "^4.0.0",
+    "uuid": "^8.3.2"
+  }
+}
