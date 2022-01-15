@@ -1,0 +1,122 @@
+<div class="p-4 my-5 bg-white rounded-lg border border-gray-200 shadow-md  dark:bg-gray-800 dark:border-gray-700">
+  <form class="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8" action="#">
+    <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+        Updates data the users
+    </h3>
+    <div>
+      <label
+        for="name"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        >Your Name</label
+      >
+      <input
+        type="text"
+        name="name"
+        id="name"
+        value="{{dataUsers.name}}"
+       
+        [(ngModel)]="dataUsers.name"
+
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+       
+        required
+      />
+    </div>
+    <div>
+      <label
+        for="lastnameFather"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        >Your LastName Father
+       
+        </label
+      >
+      <input
+        type="text"
+        name="lastNameFather"
+        id="lastNameFather"
+        value="{{dataUsers.lastNameFather}}"
+      
+        [(ngModel)]="dataUsers.lastNameFather"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+        required
+      />
+    </div>
+
+    <div>
+        <label
+          for="lastNameMother"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >Your LastName Mother</label
+        >
+        <input
+          type="text"
+          name="lastNameMother"
+          id="lastNameMother"
+          value="{{dataUsers.lastNameMother}}"
+          
+          
+          [(ngModel)]="dataUsers.lastNameMother"
+
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+          required
+        />
+      </div>
+
+      <div>
+        <label
+          for="Direction"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >Your Direction</label
+        >
+        <input
+          type="text"
+          name="Direction"
+          id="Direction"
+          placeholder="{{dataUsers.Direction}}"
+        value="{{dataUsers.Direction}}"
+
+          [(ngModel)]="dataUsers.Direction"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+          required
+        />
+      </div>
+
+      <div>
+        <label
+          for="phone"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >Your Phone</label
+        >
+        <input
+          type="number"
+          name="phone"
+          id="phone"
+          
+        value="{{dataUsers.phone}}"
+
+          
+
+          placeholder="LastName Father"
+          [(ngModel)]="dataUsers.phone"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+          required
+        />
+      </div>
+
+
+
+    
+    <button
+      type="submit"
+      (click)="updateData(dataUsers._id)"
+      class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    >
+      Guardar personas
+    </button>
+    
+  </form>
+</div>
+  
+
+
+

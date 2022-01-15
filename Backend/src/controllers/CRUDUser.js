@@ -3,63 +3,64 @@ const fs = require('fs-extra');
 const path = require('path');
 
 const addUser = async (req, res) => {
-    const { names, lastNameFathers, lastNameMothers, directions, numberphone } = req.body;
-    
+    const { names, lastNameFathers, lastNameMothers, Directions, numberphone } = req.body;
+    console.log(req.body)
     const name = names.trim()
     const lastNameFather = lastNameFathers.trim()
     const lastNameMother = lastNameMothers.trim()
-    const Direction = directions.trim()
-    const phone = Number(numberphone.trim())
-    
-    
+    const Direction = Directions.trim()
+    const phone = Number(numberphone)
 
-    if (name.length >= 1 && lastNameFather.length >= 1 && lastNameMother.length >= 1 && Direction.length >= 1 ) {
+
+
+    if (name.length >= 1 && lastNameFather.length >= 1 && lastNameMother.length >= 1 && Direction.length >= 1) {
         // Verify if exist the user.
         console.log(name)
-        const searchName = await UserSchema.findOne({name});
+        const searchName = await UserSchema.findOne({ name });
         console.log(searchName);
-        if(searchName != null) return res.status(302).json({"messages" : "The user already exist"})
+        if (searchName != null) return res.status(302).json({ "messages": "The user already exist" })
 
         const User = await new UserSchema({ name, lastNameFather, lastNameMother, Direction, phone });
-    
+
         await User.save((error, success) => {
             if (error) return res.status(500).json({
                 msg: error
             })
             return res.status(201).json({ msg: 'Successfully user created' })
         });
-        
+
     } else {
         return res.status(200).json({ msg: 'No vasio user created' })
     }
-    
+
 }
 
 const searchersInTimeReal = async (req, res) => {
-    const { searchers } = req.body;
-   // ,  lastNameFather: { $regex: searchers, $options: 'i'}
+    const { searchers } = req.params;
+    // ,  lastNameFather: { $regex: searchers, $options: 'i'}
+    console.log(searchers);
     try {
         if (searchers.length <= 0) return res.json({ searchers: 'You have not written anything | No has escrito nada' });
-        
-        await UserSchema.count({ name: { $regex: searchers, $options: 'i' }} || { lastNameFather: { $regex: searchers, $options: 'i'}}, async (error, success) => {
+
+        await UserSchema.count({ name: { $regex: searchers, $options: 'i' } } || { lastNameFather: { $regex: searchers, $options: 'i' } }, async (error, success) => {
 
             if (error) return res.status(500).send('Not i finds | No lo encuentro.')
 
             if (success == 0) {
-                await UserSchema.count({ lastNameFather: { $regex: searchers, $options: 'i' }} || { lastNameFather: { $regex: searchers, $options: 'i'}}, async (error, success) => {
+                await UserSchema.count({ lastNameFather: { $regex: searchers, $options: 'i' } } || { lastNameFather: { $regex: searchers, $options: 'i' } }, async (error, success) => {
 
                     if (success == 0) {
-                        const DBAUser = await UserSchema.find({lastNameMother: { $regex: searchers, $options: 'i'}}, (error, success) => { if (error) return res.send('No encontrado') }).sort({ createdAt: -1 });
+                        const DBAUser = await UserSchema.find({ lastNameMother: { $regex: searchers, $options: 'i' } }, (error, success) => { if (error) return res.send('No encontrado') }).sort({ createdAt: -1 });
                         compare(DBAUser)
-                    }else {
-                        const DBAUser = await UserSchema.find({lastNameFather: { $regex: searchers, $options: 'i'}}, (error, success) => { if (error) return res.send('No encontrado') }).sort({ createdAt: -1 });
+                    } else {
+                        const DBAUser = await UserSchema.find({ lastNameFather: { $regex: searchers, $options: 'i' } }, (error, success) => { if (error) return res.send('No encontrado') }).sort({ createdAt: -1 });
                         compare(DBAUser)
                     }
-                    
-                 });
-              
-            }else {
-                const DBAUser = await UserSchema.find({name: { $regex: searchers, $options: 'i'}}, (error, success) => { if (error) return res.send('No encontrado') }).sort({ createdAt: -1 });
+
+                });
+
+            } else {
+                const DBAUser = await UserSchema.find({ name: { $regex: searchers, $options: 'i' } }, (error, success) => { if (error) return res.send('No encontrado') }).sort({ createdAt: -1 });
                 compare(DBAUser)
             }
 
@@ -70,9 +71,9 @@ const searchersInTimeReal = async (req, res) => {
 
 
 
-            
-            
-            
+
+
+
         });
     } catch (error) {
         return res.status(500).json({ mgs: 'Excuse me, but you are writing invalid data. | Disculpe, pero estas escribiendo datos invalidos. catch' })
@@ -119,29 +120,8 @@ async function updateUserDate(_id, response) {
 const updateUser = async (req, res) => {
 
     const { _id } = req.params;
-    const { names, lastNameFathers, lastNameMothers, directions, numberphone } = req.body;
-    
-    const name = names.trim()
-    const lastNameFather = lastNameFathers.trim()
-    const lastNameMother = lastNameMothers.trim()
-    const Direction = directions.trim()
-    const phone = Number(numberphone.trim())
-
-    if (name.length >= 1 && lastNameFather.length >= 1 && lastNameMother.length >= 1 && Direction.length >= 1 ) {
-        json = {
-            name,
-            lastNameFather,
-            lastNameMother,
-            Direction,
-            phone 
-        }
-        updateUserDate(_id, json);
+    updateUserDate(_id, req.body);
         return res.status(200).json({ msg: 'Successfully user updated' })
-    } else {
-        return res.status(500).json({ msg: 'erro user updated' })
-        
-    }
-    
 }
 
 const deleteOneUser = async (req, res) => {
@@ -170,7 +150,7 @@ const deleteAllUser = async (req, res) => {
             const showOneUserSchema = await UserSchema.findOne({ _id: _ids });
             if (showOneUserSchema === null) return res.status(404).send('El productos no existe o no esta en sistema...');
 
-           
+
 
             await UserSchema.deleteOne({ _id: _ids });
             //console.log(showOneProducts)

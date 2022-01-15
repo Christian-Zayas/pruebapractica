@@ -1,0 +1,166 @@
+<form #searchUsers="ngForm" (ngSubmit)="search(searchUsers)" >
+  <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+  <div class="grid grid-cols-3 gap-6">
+    <div class="col-span-3 sm:col-span-2">
+      <label
+        for="company-website"
+        class="block text-sm font-medium text-gray-700"
+      >
+        Search people
+      </label>
+      <div class="mt-1 flex rounded-md shadow-sm">
+        <span
+          class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"
+          (click)="onSelect()"
+        >
+          Mostrar todas las personas
+        </span>
+     
+          <input
+          type="text"
+          name="search"
+          [(ngModel)]="dataSearchUsers.searchers"
+          #searchers="ngModel"
+          id="searchsuer"
+          class="input focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+          placeholder="Cristian Zayas "
+          
+        >
+        
+      
+        <button 
+      type="submit"
+      class="mx-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      
+    >
+      Buscar
+    </button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+<!-- Finish search-->
+<div class="grid grid-rows-2 grid-flow-col gap-2">
+    <div class="row-span-1">
+      <div class="flex flex-col">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div
+            class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
+          >
+            <div
+              class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
+            >
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Name
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      LasTName Father
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      LasTName Mother
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Direction
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Phone
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      <span> + options</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <!-- Init -->
+                  <tr *ngFor="let AllUsers of showAllUsers">
+                    <!-- for -->
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                        <div class="flex-shrink-0 h-10 w-10">
+                          <img
+                            class="h-10 w-10 rounded-full"
+                            src="https://picsum.photos/700/400?random"
+                            alt=""
+                          />
+                        </div>
+                        <div class="ml-4">
+                          <div class="text-sm font-medium text-gray-900">
+                            {{ AllUsers.name }}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-sm text-gray-900">
+                        {{ AllUsers.lastNameFather }}
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-sm text-gray-900">
+                        {{ AllUsers.lastNameMother }}
+                      </div>
+                    </td>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                    >
+                      {{ AllUsers.Direction }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <span
+                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                      >
+                        {{ AllUsers.phone }}
+                      </span>
+                    </td>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                    >
+                      <a
+                        [routerLink]="['update/edit/',AllUsers._id ]"
+                        class="inline-flex items-center justify-center px-3 py-3 mx-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+                        id="{{ AllUsers._id }}"
+                        data-modal-toggle="61de4a2a3e257e27b057be20"
+                        >Edit
+                      </a>
+                      <a
+                        href="#"
+                        class="inline-flex items-center justify-center px-3 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
+                        id="{{ AllUsers._id }}"
+                        (click)="deleteUser(AllUsers._id)"
+                        data-modal-toggle="#modalAllUsers._id"
+                        >Delete
+                      </a>
+                    </td>
+                    <!-- finish for -->
+                  </tr>
+                  <!-- More people... -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

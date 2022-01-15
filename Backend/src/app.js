@@ -16,7 +16,7 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cors({origin: 'http://localhost:4200' ,optionsSuccessStatus: 200}))
-app.use('/admin' , require('./routes/routerUser'));
+app.use('/api' , require('./routes/routerUser'));
 
 
 // Exports app

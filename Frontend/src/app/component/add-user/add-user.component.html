@@ -1,0 +1,149 @@
+
+
+<section class="flex flex-col my-5 items-center full-width bg-white rounded-lg border shadow-md  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+  <img class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="https://cdn.pixabay.com/photo/2021/06/12/04/56/couple-6330001_960_720.png" alt="">
+  <div class="flex flex-col justify-between p-4 leading-normal full-width">
+
+  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> Register people new  in 2022</h5>
+  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+    Por favor rellene todos los campos que estamos solicitando, para poder registrarse correctamente. 
+  </p>
+
+  <form  class="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8" (ngSubmit)="saveData()">
+    
+    <div>
+      <label
+        for="name"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        >Your Name
+        </label
+      >
+      <input
+        type="text"
+        name="name"
+        [(ngModel)]="dataUsers.names"
+        #names="ngModel"
+        id="name"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+        placeholder="Name"
+        required
+        autofocus
+      />
+      <div *ngIf="names.invalid && (names.dirty || names.touched)"
+      class="alert">
+      <div *ngIf="names.errors?.['required']">
+        <p class=" text-gray-700 dark:text-gray-400">Name is required.</p>
+      </div>
+    </div>
+    </div>
+    <div>
+      <label
+        for="lastnameFather"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        >Your LastName Father</label
+      >
+      <input
+        type="text"
+        name="lastnameFather"
+        id="lastnameFather"
+        [(ngModel)]="dataUsers.lastNameFathers"
+        #lastNameFathers="ngModel"
+        placeholder="LastName Father"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+        required
+      />
+      <div *ngIf="lastNameFathers.invalid && (lastNameFathers.dirty || lastNameFathers.touched)"
+      class="alert">
+      <div *ngIf="lastNameFathers.errors?.['required']">
+        <p class=" text-gray-700 dark:text-gray-400">Name is required.</p>
+      </div>
+    </div>
+    </div>
+
+    <div>
+        <label
+          for="lastnameMother"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >Your LastName Mother</label
+        >
+        <input
+          type="text"
+          name="lastnameMother"
+          id="lastnameMother"
+          [(ngModel)]="dataUsers.lastNameMothers"
+          #lastNameMothers="ngModel"
+          placeholder="LastName Father"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+          required
+        />
+        <div *ngIf="lastNameMothers.invalid && (lastNameMothers.dirty || lastNameMothers.touched)"
+      class="alert">
+      <div *ngIf="lastNameMothers.errors?.['required']">
+        <p class=" text-gray-700 dark:text-gray-400">Name is required.</p>
+      </div>
+    </div>
+      </div>
+
+      <div>
+        <label
+          for="direction"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >Your Direction</label
+        >
+        <input
+          type="text"
+          name="direction"
+          
+          [(ngModel)]="dataUsers.Directions"
+          #Directions="ngModel"
+          id="direction"
+          placeholder="LastName Father"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+          required
+        />
+        <div *ngIf="Directions.invalid && (Directions.dirty || Directions.touched)"
+      class="alert">
+      <div *ngIf="Directions.errors?.['required']">
+        <p class=" text-gray-700 dark:text-gray-400">Name is required.</p>
+      </div>
+    </div>
+      </div>
+
+      <div>
+        <label
+          for="phone"
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >Your Phone</label
+        >
+        <input
+          type="number"
+          name="phone"
+          id="phone"
+
+          [(ngModel)]="dataUsers.numberphone"
+          #numberphone="ngModel"
+          placeholder="LastName Father"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+          required
+        />
+        <div *ngIf="numberphone.invalid && (numberphone.dirty || numberphone.touched)"
+      class="alert">
+      <div *ngIf="numberphone.errors?.['required']">
+        <p class=" text-gray-700 dark:text-gray-400">Name is required.</p>
+      </div>
+    </div>
+      </div>
+    
+    <button 
+      type="submit"
+      class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      
+    >
+      Guardar personas
+    </button>
+    
+  </form>
+  </div>
+
+  </section>
+  
