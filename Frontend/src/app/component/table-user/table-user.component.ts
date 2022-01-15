@@ -2,7 +2,8 @@ import { Component, OnInit,  } from '@angular/core';
 import { dataPeople } from '../../models/dataPeople';
 import { dataSearch } from '../../models/dataSearch';
 import { ServicesService } from '../../services.service';
-import  {NgForm} from '@angular/forms';
+import  {NgForm, FormControl} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-table-user',
   templateUrl: './table-user.component.html',
@@ -18,12 +19,27 @@ export class TableUserComponent implements OnInit {
     
   };
 
-  constructor(private service: ServicesService) { }
+  constructor(private service: ServicesService ,  private toast: ToastrService) { }
 
-
+  searchTime = new FormControl('');
  
 
   ngOnInit(): void {
+    this.getAllUsers();
+    
+    this.searchTime.valueChanges.subscribe(value => {
+      if(value.length == 0) {
+        this.getAllUsers();
+       
+      }else {
+     this.runSeaerch(value);
+      }
+      
+    });
+  }
+
+
+  getAllUsers() {
     this.service.getUsers().subscribe(res => { 
       console.log(res)
       this.showAllUsers = res.msg;
@@ -31,15 +47,20 @@ export class TableUserComponent implements OnInit {
     err => {
       this.showAllUsers = []
     });
-
+  }
+  searchTimeChange(event : any) {
+    console.log(event);
   }
 
   deleteUser(id: any) {
-    this.service.deleteUser(id).subscribe(res => {
-      console.log(res);
-      return this.ngOnInit();
-      
-    });
+   const  boolead =  confirm('Esta seguro de eliminar este usuario?');
+    if(boolead) {
+      this.service.deleteUser(id).subscribe(res => {
+        console.log(res);
+        return this.ngOnInit(); 
+      });
+    }
+    
   }
   onSelect() {
     
@@ -52,8 +73,25 @@ export class TableUserComponent implements OnInit {
     });
   }
 
+  runSeaerch(data: string) {
+    return this.service.search(data).subscribe(res => {
+      if(res.DBAUser.length === 0) {
+        alert('No se encontro ningun usuario');
+       this.service.getUsers().subscribe(res => { 
+        console.log(res)
+        this.showAllUsers = res.msg;
+      },
+      err => {
+        this.showAllUsers = []
+      });
+      }
+      this.showAllUsers = res.DBAUser;
+    }, err => {
+      console.log(err);
+    });
+  }
   
-  search(form : NgForm) {
+  search(form: NgForm) {
     
     return this.service.search(this.dataSearchUsers.searchers).subscribe(res => {
       if(res.DBAUser.length === 0) {

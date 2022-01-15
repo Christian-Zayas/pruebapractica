@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import {ToastrModule} from 'ngx-toastr'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddUserComponent } from './component/add-user/add-user.component';
 import { UpdateUsersComponent } from './component/update-users/update-users.component';
-import { SearchUsersComponent } from './component/search-users/search-users.component';
+
 import { NavigationComponent } from './component/navigation/navigation.component';
-import { DeleteusersComponent } from './component/deleteusers/deleteusers.component';
+
 import { TableUserComponent } from './component/table-user/table-user.component';
 
 @NgModule({
@@ -17,16 +19,17 @@ import { TableUserComponent } from './component/table-user/table-user.component'
     AppComponent,
     AddUserComponent,
     UpdateUsersComponent,
-    SearchUsersComponent,
     NavigationComponent,
-    DeleteusersComponent,
     TableUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    SweetAlert2Module.forRoot(),
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
