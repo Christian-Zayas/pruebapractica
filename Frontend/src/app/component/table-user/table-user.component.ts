@@ -16,12 +16,12 @@ import { selectPeoplesFeatureCount } from 'src/app/selector';
 export class TableUserComponent implements OnInit {
   title = 'CRUD Angular and Nodejs';
   showAllUsers: dataPeople[] = [];
-  aviso: string = "";
+ 
+  test : boolean = false;
   people$: Observable<dataPeople> = new Observable();
   dataSearchUsers: dataSearch = { searchers: '' };
 
   constructor(private service: ServicesService,
-    private toast: ToastrService,
     private store: Store<{ people: any }>) { }
 
   searchTime = new FormControl('');
@@ -46,6 +46,7 @@ export class TableUserComponent implements OnInit {
       this.showAllUsers = res.msg;
     },
       err => {
+        this.test = true;
         this.showAllUsers = []
       });
   }
@@ -62,22 +63,15 @@ export class TableUserComponent implements OnInit {
 
   }
 
-  onSelect() {
-    this.service.getUsers().subscribe(res => {
-     // console.log(res)
-      this.showAllUsers = res.msg;
-    },
-      err => {
-        this.showAllUsers = []
-      });
-  }
+
 
   runSeaerch(data: string) {
+    
     return this.service.search(data).subscribe(res => {
       if (res.DBAUser.length === 0) {
-        alert('No se encontro ningun usuario');
         this.service.getUsers().subscribe(res => {
          // console.log(res)
+         this.test = true;
           this.showAllUsers = res.msg;
         },
           err => {
@@ -85,16 +79,16 @@ export class TableUserComponent implements OnInit {
           });
       }
       this.showAllUsers = res.DBAUser;
+      this.test = false;
     }, err => {
       console.log(err);
     });
   }
 
   search(form: NgForm) {
-
     return this.service.search(this.dataSearchUsers.searchers).subscribe(res => {
       if (res.DBAUser.length === 0) {
-        alert('No se encontro ningun usuario');
+        
         this.service.getUsers().subscribe(res => {
           //console.log(res)
           this.showAllUsers = res.msg;
