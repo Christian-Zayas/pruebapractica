@@ -13,7 +13,11 @@ import { UpdateUsersComponent } from './component/update-users/update-users.comp
 import { NavigationComponent } from './component/navigation/navigation.component';
 
 import { TableUserComponent } from './component/table-user/table-user.component';
-
+import { StoreModule } from '@ngrx/store';
+import { peopleReducer } from './peoplo.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { ROOT_REDUCERS } from './peopleStatus';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +33,9 @@ import { TableUserComponent } from './component/table-user/table-user.component'
     ReactiveFormsModule,
     FormsModule,
     SweetAlert2Module.forRoot(),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    StoreModule.forRoot(ROOT_REDUCERS),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

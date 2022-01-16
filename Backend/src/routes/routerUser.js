@@ -8,7 +8,7 @@ router.get('/oneuser/:_id' , Users.getOneUser);
 router.post('/signin' , Users.addUser);
 router.put('/updateUser/:_id' , Users.updateUser);
 router.delete('/deleteoneUser/:_id' , Users.deleteOneUser);
-router.delete('/deleteallUser/:_id' , Users.deleteAllUser);
+
 
 
 

@@ -118,10 +118,9 @@ async function updateUserDate(_id, response) {
 }
 
 const updateUser = async (req, res) => {
-
     const { _id } = req.params;
     updateUserDate(_id, req.body);
-        return res.status(200).json({ msg: 'Successfully user updated' })
+    return res.status(200).json({ msg: 'Successfully user updated' })
 }
 
 const deleteOneUser = async (req, res) => {
@@ -140,27 +139,6 @@ const deleteOneUser = async (req, res) => {
 
 }
 
-const deleteAllUser = async (req, res) => {
-
-    try {
-        const { _id } = req.body;
-        for (let index = 0; index < _id.length; index++) {
-            const _ids = _id[index];
-            if (_id.length <= 0) return res.send('No as seleccionado el producto...');
-            const showOneUserSchema = await UserSchema.findOne({ _id: _ids });
-            if (showOneUserSchema === null) return res.status(404).send('El productos no existe o no esta en sistema...');
-
-
-
-            await UserSchema.deleteOne({ _id: _ids });
-            //console.log(showOneProducts)
-        }
-        res.status(200).json({ msg: 'He deleted all products' })
-    } catch (error) {
-        return res.send('It does not seem to me that you are sending me a valid information ... / No me parece que me estás enviado un dato válido...');
-    }
-
-}
 
 module.exports = {
     addUser,
@@ -168,6 +146,5 @@ module.exports = {
     getAllUser,
     updateUser,
     deleteOneUser,
-    deleteAllUser,
     searchersInTimeReal
 }
